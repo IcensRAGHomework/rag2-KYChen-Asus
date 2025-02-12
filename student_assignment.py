@@ -12,6 +12,16 @@ def hw02_1(q1_pdf):
     return docs[len(docs) - 1]
 
 def hw02_2(q2_pdf):
-    pass
+    loader = PyPDFLoader(q2_pdf)
+    docs = loader.load()
+    text = ""
+    for doc in docs:
+        text = text + doc.page_content + "\n"
+    spliter = RecursiveCharacterTextSplitter(separators=["第[ -0123456789一二三四五六七八九十]*[章條][ \n]"],
+        chunk_size=0,
+        chunk_overlap=0,
+        is_separator_regex=True,
+        keep_separator=True)
+    result = spliter.create_documents([text])
+    return(len(result))
 
-print(hw02_1(q1_pdf))
