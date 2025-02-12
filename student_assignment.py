@@ -17,7 +17,7 @@ def hw02_2(q2_pdf):
     text = ""
     for doc in docs:
         text = text + doc.page_content + "\n"
-    spliter = RecursiveCharacterTextSplitter(separators=["第[ -0123456789一二三四五六七八九十]*[章條][ \n]"],
+    spliter = RecursiveCharacterTextSplitter(separators=["[ \n]第.*[章條][ \n]"],
         chunk_size=0,
         chunk_overlap=0,
         is_separator_regex=True,
@@ -25,3 +25,4 @@ def hw02_2(q2_pdf):
     result = spliter.create_documents([text])
     return(len(result))
 
+print(hw02_2(q2_pdf))
